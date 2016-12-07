@@ -1,26 +1,54 @@
 <!doctype html>
 <html lang="en" ng-app="myApp">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Angular Registration</title>
-  <meta name="viewport" content="width=device-width, user-scalable=no">
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,100,700,900' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>Angular Registration</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,700,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.css">
 
-  <script type="text/javascript" src="js/lib/angular/angular.min.js"></script>
-  <script type="text/javascript" src="js/lib/angular/angular-route.min.js"></script>
-  <script type="text/javascript" src="js/lib/angular/angular-animate.min.js"></script>
-  <script type="text/javascript" src="js/app.js"></script>
-  <script type="text/javascript" src="js/controllers/registration.js"></script>
-  <script type="text/javascript" src="js/controllers/success.js"></script>
+    <script type="text/javascript" src="js/lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular/angular-animate.min.js"></script>
+
+    <!-- Firebase for angularjs-->
+    <script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAtlGN42erP4FehTa_YjmM1ipXQN_xdx1I",
+            authDomain: "ngregister-fce8e.firebaseapp.com",
+            databaseURL: "https://ngregister-fce8e.firebaseio.com",
+            storageBucket: "ngregister-fce8e.appspot.com",
+            messagingSenderId: "711446941247"
+        };
+        firebase.initializeApp(config); // Get a reference to the database service
+        var database = firebase.database();
+    </script>
+    <!--End of Firebase for angularjs -->
+
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/services/authentication.js"></script>
+    <script type="text/javascript" src="js/controllers/registration.js"></script>
+    <script type="text/javascript" src="js/controllers/success.js"></script>
 </head>
-<body>
-<header></header>
-<div class="page">
-  <main class="cf" ng-view>
- 
 
-  </main>
-</div>
+<body>
+    <header>
+        <nav class="cf" ng-include="'views/nav.html'"></nav>
+    </header>
+    <div class="page">
+        <div class="userinfo" ng-show="currentUser" ng-controller="RegistrationCtrl">
+            <span class="userinfo">Hi {{currentUser.firstname}}</span>
+            <a ng-href="#/login" ng-click="logout()">logout</a>
+        </div>
+        <main class="cf" ng-view>
+        </main>
+    </div>
 </body>
+
 </html>
