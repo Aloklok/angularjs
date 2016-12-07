@@ -19,7 +19,6 @@ myApp.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject
                 .catch(function (error) {
                     $rootScope.message = error.message;
                 });
-            $rootScope.message = "Welcome " + user.email;
         },
         logout: function () {
             return auth.$signOut();
